@@ -1,3 +1,6 @@
+@import url('./custom-classes.css');
+@import url('./buttons.css');
+
 * {
   box-sizing: border-box;
   margin: 0;

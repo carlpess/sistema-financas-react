@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import SingIn from './pages/SingIn';
+import SignIn from './pages/SignIn';
 
 function MainRoutes() {
     return (
         <Routes>
-            <Route path='/' element={<SingIn />} />
+            <Route path='/' element={<SignIn />} />
         </Routes>
     )
 }
