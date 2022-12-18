@@ -1,8 +1,11 @@
 
 import './style.css';
-import Logo from '../../assets/logo.svg'
+import Logo from '../../assets/logo.svg';
+import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
+  const navigate = useNavigate()
+
   return (
     <div className='container-sign-in'>
       <img src={Logo} alt='logo' className='logo' />
@@ -16,6 +19,7 @@ function SignIn() {
           </h3>
           <button
             className='btn-purple btn-big'
+            onClick={() => navigate('/sign-up')}
           >
             Cadastre-se
           </button>
@@ -29,7 +33,7 @@ function SignIn() {
             </div>
 
             <div className='container-inputs'>
-              <label htmlFor='password'>Password</label>
+              <label htmlFor='password'>Senha</label>
               <input type='password' name='password' />
             </div>
 
