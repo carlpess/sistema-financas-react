@@ -23,12 +23,12 @@ function SignIn() {
         <div className='right'>
           <form>
             <h2>Login</h2>
-            <div>
+            <div className='container-inputs'>
               <label htmlFor='email'>E-mail</label>
               <input type='text' name='email' />
             </div>
 
-            <div>
+            <div className='container-inputs'>
               <label htmlFor='password'>Password</label>
               <input type='password' name='password' />
             </div>

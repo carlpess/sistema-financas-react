@@ -4,3 +4,18 @@
     left: 50px;
     top: 40px;
 }
+
+.container-inputs {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+}
+
+.container-inputs label {
+    color: #484848;
+
+    font-family: 'Rubik', sans-serif;
+    margin-bottom: 8px;
+}
