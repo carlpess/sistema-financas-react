@@ -4,7 +4,13 @@ import Logo from '../../assets/logo.svg';
 import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    navigate('/main');
+  }
 
   return (
     <div className='container-sign-in'>
@@ -25,7 +31,7 @@ function SignIn() {
           </button>
         </div>
         <div className='right'>
-          <form>
+          <form onSubmit={handleSubmit}>
             <h2>Login</h2>
             <div className='container-inputs'>
               <label htmlFor='email'>E-mail</label>
