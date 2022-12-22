@@ -1,0 +1,41 @@
+header {
+    background: linear-gradient(90.23deg, #05EDE3 0.02%, #645FFB 99.63%);
+
+    width: 100%;
+    height: 224px;
+
+    display: flex;
+    justify-content: center;
+    padding: 40px 50px;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.content-header img {
+    cursor: pointer;
+}
+
+.container-log-out {
+    display: flex;
+    align-items: center;
+}
+
+.profile-area {
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.profile-area img {
+    margin-right: 7px;
+}
+
+.log-out {
+    height: 24px;
+    margin-left: 16px;
+}

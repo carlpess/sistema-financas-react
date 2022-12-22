@@ -19,3 +19,8 @@
     font-family: 'Rubik', sans-serif;
     margin-bottom: 8px;
 }
+
+.width-limit {
+    width: 100%;
+    max-width: 1500px;
+}
