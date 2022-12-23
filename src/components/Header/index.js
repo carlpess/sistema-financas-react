@@ -1,8 +1,8 @@
-import './style.css';
-import Profile from '../../assets/profile-icon.svg';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 import LogOut from '../../assets/logout-icon.svg';
-import { useNavigate } from 'react-router-dom';
+import Profile from '../../assets/profile-icon.svg';
+import './style.css';
 
 
 function Header() {
