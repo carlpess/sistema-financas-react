@@ -4,9 +4,16 @@ import ArrowUp from '../../assets/arrow-up.svg'
 import ArrowDown from '../../assets/arrow-down.svg'
 import './style.css';
 import { useState } from 'react';
+import Confirm from '../Confirm';
 
 function Table() {
     const [asc, setAsc] = useState(true);
+    const [openConfirm, setOpenConfirm] = useState(false);
+
+    function handleDeleteItem() {
+        console.log('delete');
+        setOpenConfirm(false);
+    }
 
     return (
         <div className='container-table'>
@@ -32,15 +39,21 @@ function Table() {
                     <span className='table-column-big'>BAguio doido</span>
                     <span className='table-column-small'>alimento</span>
                     <strong className='table-column-small'>R$ 24,00</strong>
-                    <div className='table-column-small'>
+                    <div className='table-column-small action-buttons'>
                         <img src={EditIcon} alt='edit' />
-                        <img src={DumpIcon} alt='delete' />
+                        <img
+                            src={DumpIcon}
+                            alt='delete'
+                            onClick={() => setOpenConfirm(true)}
+                        />
                     </div>
+                    <Confirm
+                        open={openConfirm}
+                        handleConfirm={handleDeleteItem}
+                        handleClose={() => setOpenConfirm(false)}
+                    />
                 </div>
-
             </div>
-
-
         </div>
     )
 }
