@@ -25,3 +25,12 @@
     position: absolute;
     top: 120px;
 }
+
+.container-data {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-top: 26px;
+    gap: 32px;
+}
