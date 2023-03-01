@@ -5,7 +5,7 @@ import Profile from '../../assets/profile-icon.svg';
 import './style.css';
 
 
-function Header() {
+function Header({ handleEditProfile }) {
     const navigate = useNavigate();
 
     function handleLogOut() {
@@ -19,7 +19,10 @@ function Header() {
             <div className='width-limit content-header'>
                 <img src={Logo} alt='logo' />
                 <div className='container-log-out'>
-                    <div className='profile-area'>
+                    <div
+                        className='profile-area'
+                        onClick={handleEditProfile}
+                    >
                         <img src={Profile} alt='profile' />
                         <strong>NOME AQUI</strong>
                     </div>

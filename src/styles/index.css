@@ -1,6 +1,7 @@
 @import url('./custom-classes.css');
 @import url('./buttons.css');
 @import url('./inputs.css');
+@import url('./modal.css');
 
 * {
   box-sizing: border-box;
