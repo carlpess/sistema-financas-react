@@ -7,7 +7,11 @@ function ProfileModal({ open, handleClose }) {
             {open &&
                 <div className='backdrop'>
                     <div className='modal'>
-                        <img src={CloseIcon} alt='close' />
+                        <img
+                            className='close-button'
+                            src={CloseIcon}
+                            alt='close'
+                        />
                         <h2>Editar Perfil</h2>
 
                         <form>
@@ -15,6 +19,20 @@ function ProfileModal({ open, handleClose }) {
                                 <label>Nome</label>
                                 <input type='text' />
                             </div>
+                            <div className='container-inputs'>
+                                <label>E-mail</label>
+                                <input type='email' />
+                            </div>
+                            <div className='container-inputs'>
+                                <label>Senha</label>
+                                <input type='password' />
+                            </div>
+                            <div className='container-inputs'>
+                                <label>Confirmação de Senha</label>
+                                <input type='password' />
+                            </div>
+
+                            <button className='btn-purple btn-medium'>Confirmar</button>
                         </form>
                     </div>
                 </div>
