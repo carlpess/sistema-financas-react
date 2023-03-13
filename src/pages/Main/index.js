@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AddTransactionModal from '../../components/AddTransactionModal';
+import Filter from '../../components/Filter';
 import Header from '../../components/Header';
 import ProfileModal from '../../components/ProfileModal';
 import Resume from '../../components/Resume';
@@ -18,7 +19,7 @@ function Main() {
 
             <section>
                 <div className='width-limit'>
-                    <button>Filtrar</button>
+                    <Filter />
                     <div className='container-data'>
                         <Table />
                         <div className='container-right'>
