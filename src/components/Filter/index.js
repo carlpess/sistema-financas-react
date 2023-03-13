@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './style.css';
 import FilterIcon from '../../assets/filter-icon.svg'
+import Chip from '../Chip';
 
 function Filter({ }) {
     const [open, setOpen] = useState(false);
@@ -17,7 +18,8 @@ function Filter({ }) {
                     <strong>Categoria</strong>
 
                     <div>
-
+                        <Chip title='filter' checked />
+                        <Chip title='filter' />
                     </div>
                 </div>
             }
