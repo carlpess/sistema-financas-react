@@ -17,9 +17,13 @@ function Filter({ }) {
                 <div className='filters-body'>
                     <strong>Categoria</strong>
 
-                    <div>
+                    <div className='container-categories'>
                         <Chip title='filter' checked />
                         <Chip title='filter' />
+                    </div>
+                    <div className='container-filter-btns'>
+                        <button className='btn-white btn-small'>Limpar Filtros</button>
+                        <button className='btn-purple btn-small'>Aplicar Filtros</button>
                     </div>
                 </div>
             }

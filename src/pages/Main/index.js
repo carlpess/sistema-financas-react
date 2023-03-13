@@ -19,9 +19,11 @@ function Main() {
 
             <section>
                 <div className='width-limit'>
-                    <Filter />
                     <div className='container-data'>
-                        <Table />
+                        <div className='container-left'>
+                            <Filter />
+                            <Table />
+                        </div>
                         <div className='container-right'>
                             <Resume />
                             <button
