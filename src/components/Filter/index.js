@@ -3,7 +3,7 @@ import './style.css';
 import FilterIcon from '../../assets/filter-icon.svg'
 import Chip from '../Chip';
 
-function Filter({ }) {
+function Filter() {
     const [open, setOpen] = useState(false);
 
     return (

@@ -1,15 +1,23 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 import './style.css';
 import api from '../../services/api';
+import { getItem, setItem } from '../../utils/storage'
 
 function SignIn() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    const token = getItem('token');
+
+    if (token) {
+      navigate('/main')
+    }
+  }, [navigate])
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -24,9 +32,11 @@ function SignIn() {
         senha: password
       });
 
-      console.log(response)
+      const { usuario, token } = response.data;
 
-
+      setItem('token', token);
+      setItem('userId', usuario.id);
+      setItem('userName', usuario.nome);
       navigate('/main');
     } catch (error) {
       console.log(error)
