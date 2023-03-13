@@ -1,15 +1,36 @@
 
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 import './style.css';
+import api from '../../services/api';
 
 function SignIn() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  function handleSubmit(e) {
+
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    navigate('/main');
+    try {
+      if (!email || !password) {
+        return;
+      }
+
+      const response = await api.post('/login', {
+        email,
+        senha: password
+      });
+
+      console.log(response)
+
+
+      navigate('/main');
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -35,12 +56,22 @@ function SignIn() {
             <h2>Login</h2>
             <div className='container-inputs'>
               <label htmlFor='email'>E-mail</label>
-              <input type='text' name='email' />
+              <input
+                type='text'
+                name='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
 
             <div className='container-inputs'>
               <label htmlFor='password'>Senha</label>
-              <input type='password' name='password' />
+              <input
+                type='password'
+                name='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
 
             <button
