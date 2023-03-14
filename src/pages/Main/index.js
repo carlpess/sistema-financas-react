@@ -43,7 +43,9 @@ function Main() {
                             />
                         </div>
                         <div className='container-right'>
-                            <Resume />
+                            <Resume
+                                transactions={transactions}
+                            />
                             <button
                                 className='btn-purple btn-medium'
                                 onClick={() => setOpenAddTransactionModal(true)}

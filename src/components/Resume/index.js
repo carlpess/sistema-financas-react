@@ -5,7 +5,7 @@ import { getItem } from '../../utils/storage'
 import { formatMoney } from '../../utils/formatters';
 
 
-function Resume() {
+function Resume({ transactions }) {
     const [statement, setStatement] = useState({
         in: 0,
         out: 0,
@@ -35,7 +35,7 @@ function Resume() {
 
     useEffect(() => {
         loadStatement();
-    }, [])
+    }, [transactions])
 
 
     return (
