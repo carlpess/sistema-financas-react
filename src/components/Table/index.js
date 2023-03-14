@@ -6,13 +6,39 @@ import './style.css';
 import { useState } from 'react';
 import Confirm from '../Confirm';
 import { formatDate, formatMoney, formatWeekDay } from '../../utils/formatters';
+import api from '../../services/api';
+import { getItem } from '../../utils/storage';
+import { loadTransactions } from '../../utils/requisitions'
 
-function Table({ transactions }) {
+function Table({ transactions, setTransactions }) {
     const [asc, setAsc] = useState(true);
     const [openConfirm, setOpenConfirm] = useState(false);
+    const [currentItem, setCurrentItem] = useState(null);
+    const token = getItem('token');
 
-    function handleDeleteItem() {
-        setOpenConfirm(false);
+    function handleOpenConfirm(transaction) {
+        setCurrentItem(transaction);
+        setOpenConfirm(!openConfirm);
+    }
+
+    async function handleDeleteItem() {
+        try {
+            const response = await api.delete(`/transacao/${currentItem.id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            console.log(response.data);
+
+            const allTransactions = await loadTransactions();
+            setTransactions([...allTransactions]);
+        } catch (error) {
+            console.log(error)
+        }
+        finally {
+            setOpenConfirm(false);
+        }
     }
 
     return (
@@ -57,11 +83,11 @@ function Table({ transactions }) {
                             <img
                                 src={DumpIcon}
                                 alt='delete'
-                                onClick={() => setOpenConfirm(true)}
+                                onClick={() => handleOpenConfirm(transaction)}
                             />
                         </div>
                         <Confirm
-                            open={openConfirm}
+                            open={openConfirm && transaction.id === currentItem.id}
                             handleConfirm={handleDeleteItem}
                             handleClose={() => setOpenConfirm(false)}
                         />

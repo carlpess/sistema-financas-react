@@ -39,6 +39,7 @@ function Main() {
                             />
                             <Table
                                 transactions={transactions}
+                                setTransactions={setTransactions}
                             />
                         </div>
                         <div className='container-right'>
