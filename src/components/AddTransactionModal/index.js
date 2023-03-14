@@ -3,6 +3,7 @@ import CloseIcon from '../../assets/close-icon.svg';
 import { useEffect, useState } from 'react';
 import api from '../../services/api';
 import { getItem } from '../../utils/storage';
+import { loadCategories, loadTransactions } from '../../utils/requisitions';
 
 const defaultForm = {
     value: '',
@@ -15,25 +16,11 @@ const defaultForm = {
 }
 
 
-function AddTransactionModal({ open, handleClose }) {
+function AddTransactionModal({ open, handleClose, setTransactions }) {
     const token = getItem('token');
-    const [option, setOption] = useState('in');
+    const [option, setOption] = useState('out');
     const [categories, setCategories] = useState([]);
     const [form, setForm] = useState({ ...defaultForm });
-
-    async function loadCategories() {
-        try {
-            const response = await api.get('/categoria', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-
-            setCategories([...response.data]);
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     function handleChangeForm({ target }) {
         setForm({ ...form, [target.name]: target.value })
@@ -70,13 +57,22 @@ function AddTransactionModal({ open, handleClose }) {
 
             handleClose();
             setForm({ ...defaultForm });
+
+            const allTransactions = await loadTransactions();
+            setTransactions([...allTransactions]);
         } catch (error) {
             console.log(error);
         }
     }
 
     useEffect(() => {
-        loadCategories();
+        async function getCategories() {
+            const allCategories = await loadCategories();
+
+            setCategories([...allCategories]);
+        }
+
+        getCategories();
     });
 
     return (

@@ -6,32 +6,21 @@ import ProfileModal from '../../components/ProfileModal';
 import Resume from '../../components/Resume';
 import Table from '../../components/Table';
 import './style.css';
-import api from '../../services/api';
-import { getItem } from '../../utils/storage';
+import { loadTransactions } from '../../utils/requisitions';
 
 function Main() {
     const [openModalProfile, setOpenModalProfile] = useState(false);
     const [OpenAddTransactionModal, setOpenAddTransactionModal] = useState(false);
     const [transactions, setTransactions] = useState([]);
 
-    const token = getItem('token');
-
-    async function loadTransactions() {
-        try {
-            const response = await api.get('/transacao', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            setTransactions([...response.data]);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     useEffect(() => {
-        loadTransactions();
+        async function getTransactions() {
+            const allTransactions = await loadTransactions();
+
+            setTransactions([...allTransactions]);
+        }
+
+        getTransactions();
     }, [])
 
     return (
@@ -44,7 +33,10 @@ function Main() {
                 <div className='width-limit'>
                     <div className='container-data'>
                         <div className='container-left'>
-                            <Filter />
+                            <Filter
+                                transactions={transactions}
+                                setTransactions={setTransactions}
+                            />
                             <Table
                                 transactions={transactions}
                             />
@@ -65,6 +57,7 @@ function Main() {
             <AddTransactionModal
                 open={OpenAddTransactionModal}
                 handleClose={() => setOpenAddTransactionModal(false)}
+                setTransactions={setTransactions}
             />
 
             <ProfileModal
