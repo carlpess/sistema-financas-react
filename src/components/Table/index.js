@@ -5,13 +5,13 @@ import ArrowDown from '../../assets/arrow-down.svg'
 import './style.css';
 import { useState } from 'react';
 import Confirm from '../Confirm';
+import { formatDate, formatMoney, formatWeekDay } from '../../utils/formatters';
 
 function Table({ transactions }) {
     const [asc, setAsc] = useState(true);
     const [openConfirm, setOpenConfirm] = useState(false);
 
     function handleDeleteItem() {
-        console.log('delete');
         setOpenConfirm(false);
     }
 
@@ -35,11 +35,23 @@ function Table({ transactions }) {
             <div className='table-body'>
                 {transactions.map((transaction) => (
                     <div className='table-row' key={transaction.id}>
-                        <strong className='table-column-small content-date'>{transaction.data}</strong>
-                        <span className='table-column-medium'>Quarta</span>
-                        <span className='table-column-big'>{transaction.descricao}</span>
-                        <span className='table-column-small'>{transaction.categoria_nome}</span>
-                        <strong className='table-column-small'>{transaction.valor}</strong>
+                        <strong className='table-column-small content-date'>
+                            {formatDate(transaction.data)}
+                        </strong>
+                        <span className='table-column-medium'>
+                            {formatWeekDay(transaction.data)}
+                        </span>
+                        <span className='table-column-big'>
+                            {transaction.descricao}
+                        </span>
+                        <span className='table-column-small'>
+                            {transaction.categoria_nome}
+                        </span>
+                        <strong
+                            className={`${transaction.tipo === 'entrada' ? 'positive' : 'negative'} values table-column-small`}
+                        >
+                            {formatMoney(transaction.valor)}
+                        </strong>
                         <div className='table-column-small action-buttons'>
                             <img src={EditIcon} alt='edit' />
                             <img

@@ -88,3 +88,16 @@
 .action-buttons img {
     cursor: pointer;
 }
+
+.values {
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+}
+
+.positive {
+    color: #7B61FF;
+}
+
+.negative {
+    color: #FA8C10;
+}

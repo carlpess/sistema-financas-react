@@ -24,9 +24,7 @@ function Main() {
                 }
             });
 
-            console.log(response)
-
-            setTransactions([...response.data])
+            setTransactions([...response.data]);
         } catch (error) {
             console.log(error)
         }
