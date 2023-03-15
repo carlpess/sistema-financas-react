@@ -61,7 +61,6 @@ function AddTransactionModal({ open, handleClose, setTransactions }) {
             const allTransactions = await loadTransactions();
             setTransactions([...allTransactions]);
         } catch (error) {
-            console.log(error);
         }
     }
 

@@ -16,6 +16,7 @@ function Main() {
     const [openEditModal, setOpenEditModal] = useState(false);
     const [currentItemEdit, setCurrentItemEdit] = useState(null);
 
+
     useEffect(() => {
         async function getTransactions() {
             const allTransactions = await loadTransactions();

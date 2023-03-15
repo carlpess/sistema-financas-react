@@ -4,6 +4,7 @@ import api from '../../services/api';
 import { useEffect, useState } from 'react';
 import { getItem, setItem } from '../../utils/storage';
 import { loadUserProfile } from '../../utils/requisitions';
+import Notify from '../Notify';
 
 const defaultForm = {
     name: '',
@@ -15,6 +16,8 @@ const defaultForm = {
 function ProfileModal({ open, handleClose }) {
     const token = getItem('token');
     const [form, setForm] = useState({ ...defaultForm });
+    const [openNotify, setOPenNotify] = useState(false);
+    const [textNotify, setTextNotify] = useState('');
 
     function handleChangeForm({ target }) {
         setForm({ ...form, [target.name]: target.value })
@@ -25,6 +28,8 @@ function ProfileModal({ open, handleClose }) {
 
         try {
             if (form.password !== form.confirmPassword) {
+                setOPenNotify(true);
+                setTextNotify('As senhas não coincidem');
                 return;
             }
 
@@ -103,6 +108,7 @@ function ProfileModal({ open, handleClose }) {
                                     onChange={handleChangeForm}
                                     required
                                 />
+                                <span>*Senha deve conter no minímo 8 caracteres</span>
                             </div>
                             <div className='container-inputs'>
                                 <label>Confirmação de Senha</label>
@@ -120,6 +126,11 @@ function ProfileModal({ open, handleClose }) {
                     </div>
                 </div>
             }
+            <Notify
+                handleClose={() => setOPenNotify(false)}
+                open={openNotify}
+                text={textNotify}
+            />
         </>
     )
 }

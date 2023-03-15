@@ -12,3 +12,8 @@ select {
     font-size: 16px;
     font-weight: normal;
 }
+
+.container-inputs span {
+    font-family: 'Lato', sans-serif;
+    color: #B9B9B9;
+}

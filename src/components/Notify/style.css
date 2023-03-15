@@ -1,0 +1,27 @@
+.container-notify {
+    border-radius: 10px;
+
+    min-width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 20px 0 20px;
+
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    z-index: 1;
+
+    color: #FAFAFA;
+}
+
+.succes {
+    background-color: #3A9FF1;
+}
+
+.fail {
+    background-color: #FA8C10;
+}

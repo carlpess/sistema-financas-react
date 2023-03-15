@@ -5,11 +5,14 @@ import Logo from '../../assets/logo.svg';
 import './style.css';
 import api from '../../services/api';
 import { getItem, setItem } from '../../utils/storage'
+import Notify from '../../components/Notify';
 
 function SignIn() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [openNotify, setOPenNotify] = useState(false);
+  const [textNotify, setTextNotify] = useState('');
 
   useEffect(() => {
     const token = getItem('token');
@@ -39,7 +42,8 @@ function SignIn() {
       setItem('userName', usuario.nome);
       navigate('/main');
     } catch (error) {
-      console.log(error)
+      setOPenNotify(true);
+      setTextNotify(error.response.data);
     }
   }
 
@@ -92,6 +96,12 @@ function SignIn() {
           </form>
         </div>
       </div>
+
+      <Notify
+        handleClose={() => setOPenNotify(false)}
+        open={openNotify}
+        text={textNotify}
+      />
     </div>
   );
 }
