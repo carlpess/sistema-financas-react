@@ -5,6 +5,7 @@ import Logo from '../../assets/logo.svg';
 import './style.css';
 import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import Notify from '../../components/Notify';
 
 const defaultForm = {
   name: '',
@@ -16,12 +17,16 @@ const defaultForm = {
 function SignUp() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ ...defaultForm });
+  const [openNotify, setOPenNotify] = useState(false);
+  const [textNotify, setTextNotify] = useState('');
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
       if (form.password !== form.confirmPassword) {
+        setOPenNotify(true);
+        setTextNotify('As senhas não coincidem');
         return;
       }
 
@@ -36,7 +41,8 @@ function SignUp() {
       setForm({ ...defaultForm });
       navigate('/');
     } catch (error) {
-      console.log(error)
+      setOPenNotify(true);
+      setTextNotify(error.response.data);
     }
   }
 
@@ -101,6 +107,11 @@ function SignUp() {
           </form>
         </div>
       </div>
+      <Notify
+        handleClose={() => setOPenNotify(false)}
+        open={openNotify}
+        text={textNotify}
+      />
     </div>
   );
 }
