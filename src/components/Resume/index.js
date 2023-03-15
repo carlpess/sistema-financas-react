@@ -1,41 +1,24 @@
 import './style.css';
-import api from '../../services/api';
 import { useEffect, useState } from 'react';
-import { getItem } from '../../utils/storage'
 import { formatMoney } from '../../utils/formatters';
+import { loadStatement } from '../../utils/requisitions';
 
 
-function Resume() {
+function Resume({ transactions }) {
     const [statement, setStatement] = useState({
         in: 0,
         out: 0,
         balance: 0
     })
-    const token = getItem('token');
-
-    async function loadStatement() {
-        try {
-            const response = await api.get('/transacao/extrato', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            const { entrada, saida } = response.data;
-
-            setStatement({
-                in: entrada,
-                out: saida,
-                balance: entrada - saida
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     useEffect(() => {
-        loadStatement();
-    }, [])
+        async function getStatement() {
+            const statement = await loadStatement();
+
+            setStatement({ ...statement })
+        }
+        getStatement();
+    }, [transactions])
 
 
     return (

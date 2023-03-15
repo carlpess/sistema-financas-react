@@ -2,12 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 import LogOut from '../../assets/logout-icon.svg';
 import Profile from '../../assets/profile-icon.svg';
-import { clear } from '../../utils/storage';
+import { clear, getItem } from '../../utils/storage';
 import './style.css';
 
 
 function Header({ handleEditProfile }) {
     const navigate = useNavigate();
+    const userName = getItem('userName');
 
     function handleLogOut() {
         clear();
@@ -26,7 +27,7 @@ function Header({ handleEditProfile }) {
                         onClick={handleEditProfile}
                     >
                         <img src={Profile} alt='profile' />
-                        <strong>NOME AQUI</strong>
+                        <strong>{userName}</strong>
                     </div>
                     <img
                         src={LogOut}

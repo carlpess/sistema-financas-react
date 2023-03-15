@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import api from '../../services/api';
 import { getItem } from '../../utils/storage';
 import { loadCategories, loadTransactions } from '../../utils/requisitions';
+import { formatDateEdit } from '../../utils/formatters';
 
 const defaultForm = {
     value: '',
@@ -16,7 +17,7 @@ const defaultForm = {
 }
 
 
-function AddTransactionModal({ open, handleClose, setTransactions }) {
+function EditTransactionModal({ open, handleClose, setTransactions, currentItemEdit }) {
     const token = getItem('token');
     const [option, setOption] = useState('out');
     const [categories, setCategories] = useState([]);
@@ -43,7 +44,7 @@ function AddTransactionModal({ open, handleClose, setTransactions }) {
         const [year, month, day] = form.date.split('-')
 
         try {
-            await api.post('/transacao', {
+            await api.put(`/transacao/${currentItemEdit.id}`, {
                 tipo: option === 'in' ? 'entrada' : 'saida',
                 descricao: form.description,
                 valor: (form.value) * 100,
@@ -72,7 +73,32 @@ function AddTransactionModal({ open, handleClose, setTransactions }) {
         }
 
         getCategories();
-    });
+    }, []);
+
+    useEffect(() => {
+        if (currentItemEdit) {
+            const {
+                categoria_id,
+                categoria_nome,
+                data,
+                descricao,
+                tipo,
+                valor
+            } = currentItemEdit;
+
+            setForm({
+                value: (valor / 100).toFixed(2),
+                category: {
+                    id: categoria_id,
+                    name: categoria_nome,
+                },
+                date: formatDateEdit(data),
+                description: descricao
+            });
+
+            setOption(tipo === 'entrada' ? 'in' : 'out');
+        }
+    }, [currentItemEdit])
 
     return (
         <>
@@ -85,7 +111,7 @@ function AddTransactionModal({ open, handleClose, setTransactions }) {
                             alt='close'
                             onClick={handleClose}
                         />
-                        <h2>Adicionar Registro</h2>
+                        <h2>Editar Registro</h2>
 
                         <div className='container-option'>
                             <button
@@ -168,4 +194,4 @@ function AddTransactionModal({ open, handleClose, setTransactions }) {
     )
 }
 
-export default AddTransactionModal;
+export default EditTransactionModal;

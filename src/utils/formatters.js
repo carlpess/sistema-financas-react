@@ -26,3 +26,9 @@ export function formatMoney(value) {
 
     return value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 }
+
+export function formatDateEdit(date) {
+    const newDate = new Date(date);
+
+    return format(newDate, 'yyyy-MM-dd');
+}

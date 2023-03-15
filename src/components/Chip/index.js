@@ -1,8 +1,23 @@
 import './style.css';
 
-function Chip({ title, checked }) {
+function Chip({ title, checked, id, categories, setCategories }) {
+    function handleCheckCategories() {
+        const localCategories = [...categories];
+
+        localCategories.forEach((categ) => {
+            if (categ.id === id) {
+                categ.checked = !categ.checked
+            }
+        });
+
+        setCategories([...localCategories]);
+    }
+
     return (
-        <div className={`${checked ? 'checked' : 'unchecked'} container-chip`}>
+        <div
+            onClick={handleCheckCategories}
+            className={`${checked ? 'checked' : 'unchecked'} container-chip`}
+        >
             <span>{title}</span>
             {checked ? 'x' : '+'}
         </div>
