@@ -50,3 +50,24 @@ export async function loadStatement() {
         console.log(error)
     }
 }
+
+export async function loadUserProfile() {
+    try {
+        const response = await api.get('/usuario', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+        const { nome, email } = response.data;
+
+        return ({
+            name: nome,
+            email,
+            password: '',
+            confirmPassword: ''
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}

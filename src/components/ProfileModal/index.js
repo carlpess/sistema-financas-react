@@ -3,6 +3,7 @@ import CloseIcon from '../../assets/close-icon.svg';
 import api from '../../services/api';
 import { useEffect, useState } from 'react';
 import { getItem, setItem } from '../../utils/storage';
+import { loadUserProfile } from '../../utils/requisitions';
 
 const defaultForm = {
     name: '',
@@ -49,29 +50,14 @@ function ProfileModal({ open, handleClose }) {
     }
 
     useEffect(() => {
-        async function loadUserProfile() {
-            try {
-                const response = await api.get('/usuario', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-
-                const { nome, email } = response.data;
-
-                setForm({
-                    ...form,
-                    name: nome,
-                    email,
-                });
-            } catch (error) {
-                console.log(error);
+        async function getUserProfile() {
+            const profile = await loadUserProfile();
+            if (open) {
+                setForm({ ...profile });
             }
         }
 
-        if (open) {
-            loadUserProfile();
-        }
+        getUserProfile();
     }, [open])
 
     return (

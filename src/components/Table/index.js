@@ -3,7 +3,7 @@ import EditIcon from '../../assets/edit-icon.svg';
 import ArrowUp from '../../assets/arrow-up.svg'
 import ArrowDown from '../../assets/arrow-down.svg'
 import './style.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Confirm from '../Confirm';
 import { formatDate, formatMoney, formatWeekDay } from '../../utils/formatters';
 import api from '../../services/api';
@@ -14,6 +14,7 @@ function Table({ transactions, setTransactions, setCurrentItemEdit, setOpenEditM
     const [asc, setAsc] = useState(true);
     const [openConfirm, setOpenConfirm] = useState(false);
     const [currentItem, setCurrentItem] = useState(null);
+    const [orderedTransactions, setOderedTransactions] = useState([]);
     const token = getItem('token');
 
     function handleOpenConfirm(transaction) {
@@ -46,6 +47,23 @@ function Table({ transactions, setTransactions, setCurrentItemEdit, setOpenEditM
         }
     }
 
+    useEffect(() => {
+        const localTransactions = [...transactions];
+
+        if (asc) {
+            localTransactions.sort((a, b) => new Date(a.data) - new Date(b.data));
+
+            setOderedTransactions([...localTransactions]);
+            return;
+        }
+
+        localTransactions.sort((a, b) => new Date(b.data) - new Date(a.data));
+
+        setOderedTransactions([...localTransactions]);
+
+
+    }, [transactions, asc])
+
     return (
         <div className='container-table'>
             <div className='table-head'>
@@ -64,7 +82,7 @@ function Table({ transactions, setTransactions, setCurrentItemEdit, setOpenEditM
             </div>
 
             <div className='table-body'>
-                {transactions.map((transaction) => (
+                {orderedTransactions.map((transaction) => (
                     <div className='table-row' key={transaction.id}>
                         <strong className='table-column-small content-date'>
                             {formatDate(transaction.data)}
