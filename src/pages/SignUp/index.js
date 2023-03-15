@@ -30,13 +30,11 @@ function SignUp() {
         return;
       }
 
-      const response = await api.post('/usuario', {
+      await api.post('/usuario', {
         nome: form.name,
         email: form.email,
         senha: form.password
       });
-
-      console.log(response.data);
 
       setForm({ ...defaultForm });
       navigate('/');

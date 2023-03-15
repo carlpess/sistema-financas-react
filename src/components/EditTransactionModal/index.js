@@ -62,7 +62,6 @@ function EditTransactionModal({ open, handleClose, setTransactions, currentItemE
             const allTransactions = await loadTransactions();
             setTransactions([...allTransactions]);
         } catch (error) {
-            console.log(error);
         }
     }
 

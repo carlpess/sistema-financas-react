@@ -16,7 +16,6 @@ export async function loadCategories() {
 
         return response.data;
     } catch (error) {
-        console.log(error)
     }
 }
 
@@ -33,7 +32,6 @@ export async function loadTransactions() {
 
         return response.data;
     } catch (error) {
-        console.log(error)
     }
 }
 
@@ -56,7 +54,6 @@ export async function loadStatement() {
             balance: entrada - saida
         });
     } catch (error) {
-        console.log(error)
     }
 }
 
@@ -80,6 +77,5 @@ export async function loadUserProfile() {
             confirmPassword: ''
         });
     } catch (error) {
-        console.log(error);
     }
 }

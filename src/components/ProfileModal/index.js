@@ -33,7 +33,7 @@ function ProfileModal({ open, handleClose }) {
                 return;
             }
 
-            const response = await api.patch('/usuario', {
+            await api.patch('/usuario', {
                 nome: form.name,
                 email: form.email,
                 senha: form.password
@@ -43,14 +43,11 @@ function ProfileModal({ open, handleClose }) {
                 }
             });
 
-            console.log(response.data);
-
             setItem('userName', form.name);
 
             handleClose();
             setForm({ ...defaultForm });
         } catch (error) {
-            console.log(error)
         }
     }
 
