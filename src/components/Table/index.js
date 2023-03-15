@@ -10,7 +10,7 @@ import api from '../../services/api';
 import { getItem } from '../../utils/storage';
 import { loadTransactions } from '../../utils/requisitions'
 
-function Table({ transactions, setTransactions }) {
+function Table({ transactions, setTransactions, setCurrentItemEdit, setOpenEditModal }) {
     const [asc, setAsc] = useState(true);
     const [openConfirm, setOpenConfirm] = useState(false);
     const [currentItem, setCurrentItem] = useState(null);
@@ -19,6 +19,11 @@ function Table({ transactions, setTransactions }) {
     function handleOpenConfirm(transaction) {
         setCurrentItem(transaction);
         setOpenConfirm(!openConfirm);
+    }
+
+    function handleOPenEdit(transaction) {
+        setCurrentItemEdit(transaction);
+        setOpenEditModal(true);
     }
 
     async function handleDeleteItem() {
@@ -79,7 +84,11 @@ function Table({ transactions, setTransactions }) {
                             {formatMoney(transaction.valor)}
                         </strong>
                         <div className='table-column-small action-buttons'>
-                            <img src={EditIcon} alt='edit' />
+                            <img
+                                src={EditIcon}
+                                alt='edit'
+                                onClick={() => handleOPenEdit(transaction)}
+                            />
                             <img
                                 src={DumpIcon}
                                 alt='delete'

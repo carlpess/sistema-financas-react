@@ -30,3 +30,23 @@ export async function loadTransactions() {
         console.log(error)
     }
 }
+
+export async function loadStatement() {
+    try {
+        const response = await api.get('/transacao/extrato', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        const { entrada, saida } = response.data;
+
+        return ({
+            in: entrada,
+            out: saida,
+            balance: entrada - saida
+        });
+    } catch (error) {
+        console.log(error)
+    }
+}

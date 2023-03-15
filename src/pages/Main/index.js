@@ -7,11 +7,14 @@ import Resume from '../../components/Resume';
 import Table from '../../components/Table';
 import './style.css';
 import { loadTransactions } from '../../utils/requisitions';
+import EditTransactionModal from '../../components/EditTransactionModal';
 
 function Main() {
     const [openModalProfile, setOpenModalProfile] = useState(false);
     const [OpenAddTransactionModal, setOpenAddTransactionModal] = useState(false);
     const [transactions, setTransactions] = useState([]);
+    const [openEditModal, setOpenEditModal] = useState(false);
+    const [currentItemEdit, setCurrentItemEdit] = useState(null);
 
     useEffect(() => {
         async function getTransactions() {
@@ -40,6 +43,8 @@ function Main() {
                             <Table
                                 transactions={transactions}
                                 setTransactions={setTransactions}
+                                setOpenEditModal={setOpenEditModal}
+                                setCurrentItemEdit={setCurrentItemEdit}
                             />
                         </div>
                         <div className='container-right'>
@@ -61,6 +66,13 @@ function Main() {
                 open={OpenAddTransactionModal}
                 handleClose={() => setOpenAddTransactionModal(false)}
                 setTransactions={setTransactions}
+            />
+
+            <EditTransactionModal
+                open={openEditModal}
+                handleClose={() => setOpenEditModal(false)}
+                setTransactions={setTransactions}
+                currentItemEdit={currentItemEdit}
             />
 
             <ProfileModal
