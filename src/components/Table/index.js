@@ -35,12 +35,9 @@ function Table({ transactions, setTransactions, setCurrentItemEdit, setOpenEditM
                 }
             });
 
-            console.log(response.data);
-
             const allTransactions = await loadTransactions();
             setTransactions([...allTransactions]);
         } catch (error) {
-            console.log(error)
         }
         finally {
             setOpenConfirm(false);
