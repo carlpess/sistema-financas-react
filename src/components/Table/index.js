@@ -29,7 +29,7 @@ function Table({ transactions, setTransactions, setCurrentItemEdit, setOpenEditM
 
     async function handleDeleteItem() {
         try {
-            const response = await api.delete(`/transacao/${currentItem.id}`, {
+            await api.delete(`/transacao/${currentItem.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
